@@ -216,6 +216,9 @@ class Recommender:
         new_params = {} if new_params is None else new_params
         init_params = {}
         for name in self._get_init_params():
+            if name == 'use_gpu':
+                init_params[name] = True
+                continue
             init_params[name] = new_params.get(name, copy.deepcopy(getattr(self, name)))
 
         return self.__class__(**init_params)
